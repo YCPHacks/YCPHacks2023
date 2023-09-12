@@ -1,3 +1,7 @@
+// To understand how this template works, please look at the index.mjs file where the "get /hardwareCheckout" route is defined.
+// And then look at the "mockData/tableData.mjs" file to see how the data is generated.
+// Modify the mock table data to fit your needs.
+// Feel free to turn the feature flags on and off to see how they work.
 doctype html
 html
   head
@@ -8,24 +12,17 @@ html
 
   body
     .container.mt-4
+      // If the seachable flag is on
       if searchable
         // Search box
         .input-group.mb-3
           input#searchInput(type="text" class="form-control" placeholder="Search...")
           .input-group-append
+            // On click, call the search function with the value of the search box
             button.btn.btn-outline-secondary(type="button" id="searchBtn" onclick="search($('#searchInput').val())") Search
-        
-
-        //- - var query = $('#searchInput').val().toLowerCase();
-        //- - var filteredData = data.filter(row =>
-        //- -   row[searchBy].toString().toLowerCase().includes(query)
-        //- - );
-        //- - renderTable(filteredData);
-        
-
 
       if filterable
-        // Filter options (You'll have to define what these are)
+        // Filter options (You'll have to define what these are, not ready yet)
         select(class="custom-select mb-3" id="filterSelect")
           option(value="all") All
           // Add more filter options if necessary
@@ -34,18 +31,29 @@ html
       table.table
         thead
           tr
+            // For each loops through the columns array and creates a table header for each column
+            // col grabs the value of the current column
+            // index grabs the index of the current column
             each col, index in columns
               th(scope="col")
                 | #{col}
+                // If the sortable flag is on
                 if sortable
+                  // On click, call the sort function with the index of the column
+                  // The sort function doesn't yet work for reverse sorting
                   a(href="#" data-sort-index=index id="sort_#{index}" onclick=`onSort(${index})`) ▼
         tbody
+          // For each loops through the data array and creates a table row for each row
           each row in data
             tr
+              // For each loops through the row array and creates a table cell for each cell
               each cell in row
                 td= cell
 
       script.
+        // This is a Pug variable that is passed in from the server
+        // The jsStringify function converts the Pug variable into a JavaScript variable
+        // This was added to avoid an error, I will look for a better solution in the future if there is one
         var data = !{jsStringify(data)};
         console.log(data);
 
@@ -53,7 +61,6 @@ html
         function searchData(query) {
           return data.filter(row =>
           row.some(cell => cell.toString().toLowerCase().includes(query.toLowerCase()))
-          //- console.log(row)
           );
         }
 
@@ -77,30 +84,33 @@ html
 
         // Render Table Function
         function renderTable(tableData) {
-          console.log(tableData);
+          // Grabs the table body
           var tbody = $('table tbody');
+          // Clears the table body
           tbody.empty();
+          // For each loops through the table data and creates a table row for each row
           tableData.forEach(row => {
+            // Adds a table row
             var tr = $('<tr></tr>');
+            // For each loops through the row and creates a table cell for each cell
             row.forEach(cell => {
+              // Adds a table cell
               tr.append(`<td>${cell}</td>`);
             });
+            // Adds the row to the table body
             tbody.append(tr);
           });
         }
 
         // Event Listeners
         function search(searchQuery) {
-            var filteredData = searchData(searchQuery);
-            renderTable(filteredData);
-            //- console.log(filteredData);
+          var filteredData = searchData(searchQuery);
+          renderTable(filteredData);
         }
         
 
         function onSort(index) {
-          console.log(index);
           var sortedData = sortData(index);
-          console.log(sortedData);
           renderTable(sortedData);
         }
 
@@ -108,8 +118,3 @@ html
           var filteredData = filterData(filterValue);
           renderTable(filteredData);
         }
-
-        // Initialize table with all data on page load
-        //- $(document).ready(function() {
-        //-   renderTable(data);
-        //- });
