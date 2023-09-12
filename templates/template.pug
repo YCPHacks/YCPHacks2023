@@ -71,5 +71,5 @@ html
         // Need to find an easier way to connect to our own endpoint here
         // But we do a POST to the /remoteWebhook endpoint with the options we just created
         // This should send the content to the Discord channel through the DigitalOcean remote function
-        fetch('http://localhost:3000/remoteWebhook', options);
+        fetch('/remoteWebhook', options);
       }
