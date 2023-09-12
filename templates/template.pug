@@ -1,0 +1,71 @@
+doctype html
+html
+  head
+    title Dashboard
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      a.navbar-brand(href="#") Dashboard
+      button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav
+          li.nav-item.active
+            a.nav-link(href="#") Home
+          li.nav-item
+            a.nav-link(href="#") Profile
+          li.nav-item
+            a.nav-link(href="#") Settings
+          li.nav-item
+            a.nav-link(href="/hardwareCheckout") Hardware Checkout
+
+    .container.mt-4
+      .row
+        .col-md-4
+          .card
+            .card-header Dashboard Widget 1
+            .card-body
+              p This is the content for the first dashboard widget.
+
+        .col-md-4
+          .card
+            .card-header Dashboard Widget 2
+            .card-body
+              p This is the content for the second dashboard widget.
+
+        .col-md-4
+          .card
+            .card-header Dashboard Widget 3
+            .card-body
+              p This is the content for the third dashboard widget.
+          body
+      
+      .container.mt-4
+        form#discordForm(onsubmit='onSubmit($("#content").val())')
+          .form-group
+            label(for="content") Send Content to Discord
+            input#content.form-control(type="text" name="content" placeholder="Enter some text")
+          .form-group
+            button.btn.btn-primary(type="submit") Submit
+          
+
+    footer.mt-4.text-center
+      p &copy; 2023 My Dashboard App
+
+    script.
+      function onSubmit(content) {
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(content)
+        }
+        console.log(options);
+
+        fetch('http://localhost:3000/remoteWebhook', options);
+      }

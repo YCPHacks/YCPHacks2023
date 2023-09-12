@@ -1,0 +1,115 @@
+doctype html
+html
+  head
+    title Dynamic Table
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    //- script(src="/public/helpers/table.js")
+
+  body
+    .container.mt-4
+      if searchable
+        // Search box
+        .input-group.mb-3
+          input#searchInput(type="text" class="form-control" placeholder="Search...")
+          .input-group-append
+            button.btn.btn-outline-secondary(type="button" id="searchBtn" onclick="search($('#searchInput').val())") Search
+        
+
+        //- - var query = $('#searchInput').val().toLowerCase();
+        //- - var filteredData = data.filter(row =>
+        //- -   row[searchBy].toString().toLowerCase().includes(query)
+        //- - );
+        //- - renderTable(filteredData);
+        
+
+
+      if filterable
+        // Filter options (You'll have to define what these are)
+        select(class="custom-select mb-3" id="filterSelect")
+          option(value="all") All
+          // Add more filter options if necessary
+
+      // Dynamic Table
+      table.table
+        thead
+          tr
+            each col, index in columns
+              th(scope="col")
+                | #{col}
+                if sortable
+                  a(href="#" data-sort-index=index id="sort_#{index}" onclick=`onSort(${index})`) ▼
+        tbody
+          each row in data
+            tr
+              each cell in row
+                td= cell
+
+      script.
+        var data = !{jsStringify(data)};
+        console.log(data);
+
+        // Search Function
+        function searchData(query) {
+          return data.filter(row =>
+          row.some(cell => cell.toString().toLowerCase().includes(query.toLowerCase()))
+          //- console.log(row)
+          );
+        }
+
+        // Sort Function (by column index)
+        function sortData(index) {
+          return data.sort((a, b) => {
+            var itemA = a[index].toString().toLowerCase();
+            var itemB = b[index].toString().toLowerCase();
+            
+            if (itemA < itemB) return -1;
+            if (itemA > itemB) return 1;
+            return 0;
+          });
+        }
+
+        // Placeholder Filter Function
+        function filterData(filterValue) {
+          // Basic example. Adjust this function to fit actual filtering needs
+          return filterValue === "all" ? data : data.filter(row => row.includes(filterValue));
+        }
+
+        // Render Table Function
+        function renderTable(tableData) {
+          console.log(tableData);
+          var tbody = $('table tbody');
+          tbody.empty();
+          tableData.forEach(row => {
+            var tr = $('<tr></tr>');
+            row.forEach(cell => {
+              tr.append(`<td>${cell}</td>`);
+            });
+            tbody.append(tr);
+          });
+        }
+
+        // Event Listeners
+        function search(searchQuery) {
+            var filteredData = searchData(searchQuery);
+            renderTable(filteredData);
+            //- console.log(filteredData);
+        }
+        
+
+        function onSort(index) {
+          console.log(index);
+          var sortedData = sortData(index);
+          console.log(sortedData);
+          renderTable(sortedData);
+        }
+
+        function onFilter(filterValue) {
+          var filteredData = filterData(filterValue);
+          renderTable(filteredData);
+        }
+
+        // Initialize table with all data on page load
+        //- $(document).ready(function() {
+        //-   renderTable(data);
+        //- });

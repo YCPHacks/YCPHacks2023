@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@fastify/static": "^6.11.0",
+    "@fastify/view": "^8.0.0",
+    "fastify": "^4.23.0",
+    "js-stringify": "^1.0.2",
+    "path": "^0.12.7",
+    "pug": "^3.0.2"
+  }
+}
