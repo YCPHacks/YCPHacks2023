@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import 'dotenv/config'; 
 import Fastify from 'fastify';
 import discordWebhook from './services/discordWebhook.mjs';
 import registerPlugins from './plugins.js';
