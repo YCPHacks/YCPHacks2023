@@ -1,7 +1,9 @@
+import 'dotenv/config';
 import Fastify from 'fastify';
 import discordWebhook from './services/discordWebhook.mjs';
 import registerPlugins from './plugins.js';
 import jsStringify from 'js-stringify';
+
 // import helpers from './helpers/index.mjs';
 
 import tableData from './mockData/tableData.mjs';
@@ -22,7 +24,7 @@ fastify.get('/', async (request, reply) => {
 // Declare a /webhook route
 // This route sends a default message to a discord webhook
 fastify.get('/webhook', async (request, reply) => {
-    const url = "https://discord.com/api/webhooks/1149688604172488724/WplauZLm0UvYzuJhRE0QQ_tH3hpSI6CnVcuWhylm_HKp-8-HqDG3rc9MC4COTzePtFwd";
+    const url = process.env.DISCORD_WEBHOOK;
     const data = "Hello World! This is Koen testing the discord webhook.";
     await discordWebhook(url, data);
     return { webhook: 'sent' };
@@ -31,9 +33,9 @@ fastify.get('/webhook', async (request, reply) => {
 // Declare a /remoteWebhook route
 // This route sends a message to our DigitalOcean Function with a default message
 fastify.get('/remoteWebhook', async (request, reply) => {
-    const url = "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-2a230f54-c502-4829-aeb0-27a77810a549/default/webhook-example";
+    const url = process.env.DIS;
     const data = { 
-        url: "https://discord.com/api/webhooks/1149688604172488724/WplauZLm0UvYzuJhRE0QQ_tH3hpSI6CnVcuWhylm_HKp-8-HqDG3rc9MC4COTzePtFwd",
+        url: process.env.DISCORD_WEBHOOK,
         content: "Hello World! \n## Header"
     };
     const options = {
@@ -53,9 +55,9 @@ fastify.get('/remoteWebhook', async (request, reply) => {
 // Declare a /remoteWebhook route
 // This route sends a message to our DigitalOcean Function with a custom message
 fastify.post('/remoteWebhook', async (request, reply) => {
-    const url = "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-2a230f54-c502-4829-aeb0-27a77810a549/default/webhook-example";
+    const url = process.env.FUNNY_URL;
     const data = { 
-        url: "https://discord.com/api/webhooks/1149688604172488724/WplauZLm0UvYzuJhRE0QQ_tH3hpSI6CnVcuWhylm_HKp-8-HqDG3rc9MC4COTzePtFwd",
+        url: process.env.DISCORD_WEBHOOK,
     };
 
     // Sets the content of the message to the request body
