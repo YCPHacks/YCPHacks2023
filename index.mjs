@@ -18,7 +18,7 @@ registerPlugins(fastify);
 
 // Declare a default route
 fastify.get('/', async (request, reply) => {
-    return { hello: 'waldo' };
+    return { hello: 'waldo push it real good' };
 });
 
 // Declare a /webhook route
