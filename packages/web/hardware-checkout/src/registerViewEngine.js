@@ -12,10 +12,7 @@ function registerViewEngine(app) {
             pug: pug,
         },
         root: path.join(require.resolve('@ycphacks/hardware-checkout'), '..', 'views'),
-        propertyName: 'viewHC',
-        defaultContext: {
-            templates: path.join(require.resolve('@ycphacks/core'), '..', 'templates')
-        }
+        propertyName: 'viewHC'
     });
 
     app.get('/inventory', async function (request, reply) {

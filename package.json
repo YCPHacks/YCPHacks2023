@@ -2,16 +2,18 @@
   "name": "root",
   "version": "1.0.0",
   "workspaces": [
-      "packages/web/*", "packages/api/*", "apps/*" 
+    "packages/web/*",
+    "packages/api/*",
+    "apps/*"
   ],
   "dependencies": {
-    "lerna": "^7.3.0",
     "@fastify/static": "^6.11.0",
     "@fastify/view": "^8.0.0",
     "@mysql/xdevapi": "^8.0.33",
     "dotenv": "^16.3.1",
     "fastify": "^4.23.0",
     "js-stringify": "^1.0.2",
+    "lerna": "^7.3.0",
     "path": "^0.12.7"
   },
   "scripts": {
