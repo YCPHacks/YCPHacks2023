@@ -6,7 +6,7 @@ const equipment = (app) => {
 
     // Create the equipment collection if it doesn't exist
     // database.createCollection('equipment');
-    database.create('equipment', { _id: 1, name: 'test' });
+    // database.create('equipment', { _id: 1, name: 'test' });
 
     // Service
 
@@ -32,7 +32,7 @@ const equipment = (app) => {
     // The data for the new piece of equipment is passed in as the request body
     app.post('/equipment', async (req, res) => {
         const equipment = await database.create('equipment', req.body);
-        console.log(equipment);
+        // console.log(equipment);
         return equipment;
     });
 

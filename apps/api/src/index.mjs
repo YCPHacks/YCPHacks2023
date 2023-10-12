@@ -1,7 +1,7 @@
 import 'dotenv/config'; 
 import Fastify from 'fastify';
 import registerServices from './registerServices.mjs';
-import registerPlugins from './registerPlugins';
+import registerPlugins from './registerPlugins.js';
 
 const fastify = Fastify({ logger: true });
 

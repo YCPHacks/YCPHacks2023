@@ -6,8 +6,8 @@ import Fastify from 'fastify';
 
 // import registerPlugins from './plugins.js';
 // import jsStringify from 'js-stringify';
-import eventControlPanel from "@ycphacks/event-control-panel";
-import hardwareCheckout from "@ycphacks/hardware-checkout";
+import eventControlPanel from "@ycphacks/event-control-panel-web";
+import hardwareCheckout from "@ycphacks/hardware-checkout-web";
 
 console.log(hardwareCheckout);
 

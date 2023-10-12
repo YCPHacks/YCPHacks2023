@@ -8,7 +8,7 @@ function registerViewEngine(app) {
         engine: {
             pug: pug,
         },
-        root: path.join(require.resolve('@ycphacks/event-control-panel'), '..', 'views'),
+        root: path.join(require.resolve('@ycphacks/event-control-panel-web'), '..', 'views'),
         propertyName: 'viewDD'
     });
 

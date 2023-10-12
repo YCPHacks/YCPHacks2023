@@ -11,7 +11,7 @@ function registerViewEngine(app) {
         engine: {
             pug: pug,
         },
-        root: path.join(require.resolve('@ycphacks/hardware-checkout'), '..', 'views'),
+        root: path.join(require.resolve('@ycphacks/hardware-checkout-web'), '..', 'views'),
         propertyName: 'viewHC'
     });
 
