@@ -1,7 +1,7 @@
 // import database, { create } from '../services/database.js';
-import { api } from '@ycphacks/core';
+import { utils } from '@ycphacks/core-api';
 
-const { serverConnection } = api;
+const { serverConnection } = utils;
 // Purpose: to provide mock data for the table component
 
 // These are the column headers for the table

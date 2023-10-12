@@ -1,0 +1,6 @@
+{
+    "name": "@ycphacks/core-api",
+    "version": "0.0.1",
+    "description": "Core API package for YCPHacks",
+    "main": "src/index.mjs"
+}

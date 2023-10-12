@@ -1,5 +1,5 @@
 {
-    "name": "@ycphacks/hardware-checkout",
+    "name": "@ycphacks/hardware-checkout-web",
     "version": "1.0.0",
     "description": "Hardware checkout system for YCP Hacks",
     "main": "src/index.mjs",

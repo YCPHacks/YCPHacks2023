@@ -135,6 +135,7 @@ async function find (collectionName, query, schemaName = connectionConfig.schema
         session = await connect();
         const collection = await session.getSchema(schemaName).getCollection(collectionName);
         result = await collection.find(query).execute().then(res => {
+            console.log(res.fetchAll());
             return res.fetchAll();
         });
         console.log(result);

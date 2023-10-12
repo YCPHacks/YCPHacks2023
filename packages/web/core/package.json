@@ -1,5 +1,5 @@
 {
-    "name": "@ycphacks/core",
+    "name": "@ycphacks/core-web",
     "version": "0.0.1",
     "description": "Core package for YCPHacks",
     "main": "src/index.mjs"

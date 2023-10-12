@@ -6,6 +6,7 @@ const equipment = (app) => {
 
     // Create the equipment collection if it doesn't exist
     // database.createCollection('equipment');
+    database.create('equipment', { _id: 1, name: 'test' });
 
     // Service
 
@@ -13,7 +14,7 @@ const equipment = (app) => {
     // This service retrieves a single piece of equipment by its ID
     // The id is passed in as a parameter in the URL
     app.get('/equipment/:id', async (req, res) => {
-        const equipment = await database.find('equipment', `id = ${req.params.id}`);
+        const equipment = await database.find('equipment', `_id = ${req.params.id}`);
         return equipment;
     });
 

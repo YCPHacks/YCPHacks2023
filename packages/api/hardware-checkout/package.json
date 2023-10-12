@@ -1,0 +1,9 @@
+{
+    "name": "@ycphacks/hardware-checkout-api",
+    "version": "1.0.0",
+    "description": "Hardware checkout system for YCP Hacks",
+    "main": "src/index.mjs",
+    "dependencies": {
+        "fastify-plugin": "^4.5.1"
+    }
+}

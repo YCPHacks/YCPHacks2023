@@ -1,10 +1,13 @@
 import 'dotenv/config'; 
 import Fastify from 'fastify';
 import registerServices from './registerServices.mjs';
+import registerPlugins from './registerPlugins';
 
 const fastify = Fastify({ logger: true });
 
 registerServices(fastify);
+
+registerPlugins(fastify);
 
 const start = async () => {
     try {
