@@ -1,13 +1,14 @@
 import 'dotenv/config'; 
 import Fastify from 'fastify';
-import registerServices from './registerServices.mjs';
 import registerPlugins from './registerPlugins.js';
+
+import hardwareCheckout from "@ycphacks/hardware-checkout-api";
 
 const fastify = Fastify({ logger: true });
 
-registerServices(fastify);
-
 registerPlugins(fastify);
+
+fastify.register(hardwareCheckout);
 
 const start = async () => {
     try {

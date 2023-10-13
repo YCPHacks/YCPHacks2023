@@ -1,6 +1,5 @@
 const cors = require('fastify-cors');
 
-
 function registerPlugins(app) {
     if (process.env.NODE_ENV === 'development') {
         fastify.register(cors, {

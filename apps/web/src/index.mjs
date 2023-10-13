@@ -8,23 +8,25 @@ import Fastify from 'fastify';
 // import jsStringify from 'js-stringify';
 import eventControlPanel from "@ycphacks/event-control-panel-web";
 import hardwareCheckout from "@ycphacks/hardware-checkout-web";
-
-console.log(hardwareCheckout);
+import core from "@ycphacks/core-web"
 
 // Creates a new Fastify instance
 const fastify = Fastify({ logger: true });
 
+// Register each sub-app as a plugin
 fastify.register(eventControlPanel);
-
 fastify.register(hardwareCheckout);
+fastify.register(core);
 
 // Register plugins
 // registerPlugins(fastify);
 
-// Run the server!
+fastify.setNotFoundHandler(async function (request, reply) {
+    return reply.viewCore('404.pug');
+});
 const start = async () => {
     try {
-        await fastify.listen(3000);
+        await fastify.listen(process.env.PORT);
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);

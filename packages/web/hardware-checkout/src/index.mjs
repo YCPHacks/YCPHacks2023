@@ -11,6 +11,7 @@ export default fp(async function plugin(fastify, options) {
         .send('<html><h1>Bryce is a cool guy</h1></html>')
     });
   }, {
-    name: 'hardware-checkout'
+    name: 'hardware-checkout',
+    prefix: '/hardware-checkout'
   })
   

@@ -1,7 +1,9 @@
-import * as api from './api/index.mjs';
-// import * as templates from './templates/index.js';
+import fp from 'fastify-plugin';
+import registerViewEngine from './registerViewEngine.js';
 
-export {
-    api,
-    // templates
-}
+// Compile code into a single fastify plugin
+export default fp(async function plugin(fastify, options) {
+    registerViewEngine(fastify);
+  }, {
+    name: 'core',
+  })
