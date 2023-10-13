@@ -1,0 +1,16 @@
+{
+    "name": "@ycphacks/hardware-checkout-web",
+    "version": "1.0.0",
+    "description": "Hardware checkout system for YCP Hacks",
+    "main": "src/index.mjs",
+    "dependencies": {
+        "@fastify/static": "^6.11.2",
+        "@fastify/view": "^8.2.0",
+        "fastify-plugin": "^4.5.1",
+        "path": "^0.12.7",
+        "pug": "^3.0.2"
+    },
+    "files": [
+        "src/views/*"
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "name": "@ycphacks/web-app",
+    "version": "0.1.0",
+    "description": "Web app for YCPHacks",
+    "main": "src/index.mjs",
+    "scripts": {
+        "start": "node src/index.mjs"
+    }
+}

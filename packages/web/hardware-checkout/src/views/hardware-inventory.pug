@@ -1,0 +1,18 @@
+// To understand how this template works, please look at the index.mjs file where the "get /hardwareCheckout" route is defined.
+// And then look at the "mockData/tableData.mjs" file to see how the data is generated.
+// Modify the mock table data to fit your needs.
+// Feel free to turn the feature flags on and off to see how they work.
+doctype html
+html
+  head
+    title Dynamic Table
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+
+  body
+    include includes/header.pug
+    h1 Hardware Inventory
+
+    include includes/table.pug
+    a.btn.btn-primary.ml-4(href="/newEquipment" role="button") Add New Equipment
+      

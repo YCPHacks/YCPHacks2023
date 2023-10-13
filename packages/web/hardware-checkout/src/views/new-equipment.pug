@@ -1,0 +1,57 @@
+doctype html
+html
+  head
+    title Add New Equipment
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+
+  body
+    .container.mt-4
+      h2 Add New Equipment
+      form#equipmentForm(onsubmit='onSubmit($("#equipmentName").val(), $("#equipmentType").val(), $("#equipmentAvailable").val())')
+        .form-group
+          label(for="equipmentName") Equipment Name
+          input#equipmentName.form-control(type="text" name="name" placeholder="Enter equipment name" required)
+
+        .form-group
+          label(for="equipmentType") Equipment Type
+          input#equipmentType.form-control(type="text" name="type" placeholder="Enter equipment type" required)
+
+        .form-group.form-check
+          input#equipmentAvailable.form-check-input(type="checkbox" name="isAvailable")
+          label.form-check-label(for="equipmentAvailable") Is Available?
+
+        .form-group.mt-3
+          button.btn.btn-primary(type="submit") Add Equipment
+
+    script.
+      // Function to submit the form
+      // This function takes to form input data and sends it to the api server
+        function onSubmit(name, type, isAvailable) {
+        const API_APP_URL = 'http://localhost:3030/'; // Replace with your API URL
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            tag: name,
+            category: type,
+            available: isAvailable
+          })
+        }
+        // Fetch request to the 'api' server
+        // Makes a POST request to the equipment endpoint
+        // This endpoint creates a new object in the database with the data from the form
+        console.log(API_APP_URL + 'equipment');
+        fetch(API_APP_URL + 'equipment', options)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            alert('Equipment added successfully!')
+          })
+          .catch(error => {
+            console.log(error)
+            alert('There was an error adding the equipment.')
+          });        }
+
