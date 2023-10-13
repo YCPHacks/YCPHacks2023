@@ -14,9 +14,9 @@ import core from "@ycphacks/core-web"
 const fastify = Fastify({ logger: true });
 
 // Register each sub-app as a plugin
+fastify.register(core);
 fastify.register(eventControlPanel);
 fastify.register(hardwareCheckout);
-fastify.register(core);
 
 // Register plugins
 // registerPlugins(fastify);
@@ -29,7 +29,7 @@ const start = async () => {
         await fastify.listen(process.env.PORT);
     } catch (err) {
         fastify.log.error(err);
-        process.exit(1);
+        process.exitCode = 1;
     }
 };
 

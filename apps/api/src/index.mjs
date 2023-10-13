@@ -15,7 +15,7 @@ const start = async () => {
         await fastify.listen(process.env.PORT);
     } catch (err) {
         fastify.log.error(err);
-        process.exit(1);
+        process.exitCode = 1;
     }
 };
 
