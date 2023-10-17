@@ -8,7 +8,9 @@ const fastify = Fastify({ logger: true });
 
 registerPlugins(fastify);
 
-fastify.register(hardwareCheckout);
+fastify.register(hardwareCheckout, {
+    prefix: '/hardware-checkout'
+});
 
 const start = async () => {
     try {

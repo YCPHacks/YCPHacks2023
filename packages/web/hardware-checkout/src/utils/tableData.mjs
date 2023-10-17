@@ -16,7 +16,10 @@ const columns = ["Tag", "Category", "Available"];
 async function getData() {
     // const equipment = await database.find('equipment');
     const equipment = await serverConnection('GET', 'equipment');
-
+    
+    if (!equipment) {
+        return [];
+    }
     const data = equipment.map((item) => {
         return [item.tag, item.category, item.available];
     });
@@ -32,7 +35,8 @@ const filterable = true;
 async function createTableData() {
     return {
         columns,
-        data: await getData(),
+        // data: await getData(),
+        data: [],
         sortable,
         searchable,
         filterable,

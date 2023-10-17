@@ -4,8 +4,7 @@
 import 'dotenv/config'; 
 import Fastify from 'fastify';
 
-// import registerPlugins from './plugins.js';
-// import jsStringify from 'js-stringify';
+import registerPlugins from './plugins.js';
 import eventControlPanel from "@ycphacks/event-control-panel-web";
 import hardwareCheckout from "@ycphacks/hardware-checkout-web";
 import core from "@ycphacks/core-web"
@@ -15,15 +14,16 @@ const fastify = Fastify({ logger: true });
 
 // Register each sub-app as a plugin
 fastify.register(core);
-fastify.register(eventControlPanel);
-fastify.register(hardwareCheckout);
+fastify.register(eventControlPanel, {
+    prefix: '/event-control-panel'
+});
+fastify.register(hardwareCheckout, {
+    prefix: '/hardware-checkout'
+});
 
 // Register plugins
-// registerPlugins(fastify);
+registerPlugins(fastify);
 
-fastify.setNotFoundHandler(async function (request, reply) {
-    return reply.viewCore('404.pug');
-});
 const start = async () => {
     try {
         await fastify.listen(process.env.PORT);

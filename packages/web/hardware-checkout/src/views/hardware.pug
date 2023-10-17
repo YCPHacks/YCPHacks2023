@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Hardware Page
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css")
+
+  body
+    include includes/navbar.pug
+    .container.mt-5
+      .row 
+        h2 Hardware
+        a.btn.btn-link(href="/inventory") Back to Inventory
+
+      .row.mb-4
+        .col-md-6
+          .card.p-3
+            h5 Tag: PC-1
+            p.mb-1 Category: PC
+            p.mb-1 Available: Yes
+            p.mb-1 User: N/A
+            p.mb-1 Date: N/A
+            .input-group
+              input.form-control(type="text", placeholder="User", aria-label="User")
+              button.btn.btn-primary(type="button") Checkout
+              
+        .col-md-6
+          .card.p-3
+            h5 Rental Record
+            ul.list-group.list-group-flush
+              li.list-group-item Koen checked item out 10:43am 10/9/2023
+              li.list-group-item Koen checked item in 10:45am 10/9/2023
+              li.list-group-item Trey checked item out 11:36am 10/9/2023
+              li.list-group-item Trey checked item in 12:13pm 10/9/2023
+              
+      
