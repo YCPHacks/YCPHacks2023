@@ -26,7 +26,7 @@ fastify.setNotFoundHandler(async function (request, reply) {
 });
 const start = async () => {
     try {
-        await fastify.listen(process.env.PORT);
+        await fastify.listen(process.env.WEB_PORT);
     } catch (err) {
         fastify.log.error(err);
         process.exitCode = 1;

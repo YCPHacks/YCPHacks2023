@@ -40,6 +40,22 @@ async function close (session) {
     }
 }
 
+async function executeStoredProcedure (procedureName, bindingStatement = '') {
+    let result;
+    let session;
+    try {
+        session = await connect();
+        result = await session.sql(`CALL ${procedureName}(${bindingStatement})`).execute();
+        result = await result.fetchAll();
+    } catch (err) {
+        const { message, stack } = err;
+        console.error(JSON.stringify({ message, stack }));
+    } finally {
+        await close(session);
+    }
+    return result;
+}
+
 /**
  * createSchema - Creates a schema
  * @param {string} schemaName Name of the schema
@@ -276,6 +292,7 @@ module.exports = {
     connect,
     close,
     createSchema,
+    executeStoredProcedure,
     getSchema,
     createCollection,
     getCollection,
