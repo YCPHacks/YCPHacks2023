@@ -26,59 +26,38 @@ html
         table.table
           thead
             tr
-              th 
-              th Tag
-              th Category
-              th Available
-              th User
-              th Date
+              each col in columns
+                th(scope="col") #{col}
           tbody
-            tr
-              td 
-                .dropdown
-                  button.btn.btn-sm(role="button", data-bs-toggle="dropdown", aria-expanded="false", id="dropdownMenu")
-                    img(src="/hardware-checkout/public/assets/icons/list.svg" alt="list-icon" width="20" height="20")
-                  
-                  ul.dropdown-menu(aria-labelledby="dropdownMenu")
-                    li
-                      a.dropdown-item(href="/hardware-checkout/hardware/12") View Hardware
-              td PC-1
-
-              td PC
-              td
-                span.badge.bg-success.rounded-pill ✓
-              td N/A
-              td N/A
-            tr
-              td 
-                .dropdown
-                  button.btn.btn-sm(role="button", data-bs-toggle="dropdown", aria-expanded="false", id="dropdownMenu")
-                    img(src="/hardware-checkout/public/assets/icons/list.svg" alt="list-icon" width="20" height="20")
-                  
-                  ul.dropdown-menu(aria-labelledby="dropdownMenu")
-                    li
-                      a.dropdown-item(href="/hardware-checkout/hardware/12") View Hardware
-              td VR-1
-              td VR Headset
-              td
-                span.badge.bg-secondary.rounded-pill ✕
-              td N/A
-              td N/A
-            tr
-              td 
-                .dropdown
-                  button.btn.btn-sm(role="button", data-bs-toggle="dropdown", aria-expanded="false", id="dropdownMenu")
-                    img(src="/hardware-checkout/public/assets/icons/list.svg" alt="list-icon" width="20" height="20")
-                  
-                  ul.dropdown-menu(aria-labelledby="dropdownMenu")
-                    li
-                      a.dropdown-item(href="/hardware-checkout/hardware/12") View Hardware
-              td USBC-1
-              td USB Type-C Cable
-              td
-                span.badge.bg-danger.rounded-pill ✕
-              td Koen
-              td 10/5/2023 5:29PM
+            each row in data
+              tr
+                td 
+                  .dropdown
+                    button.btn.btn-sm(role="button", data-bs-toggle="dropdown", aria-expanded="false", id="dropdownMenu")
+                      img(src="/hardware-checkout/public/assets/icons/list.svg" alt="list-icon" width="20" height="20")
+                    
+                    ul.dropdown-menu(aria-labelledby="dropdownMenu")
+                      li
+                        a.dropdown-item(href=`/hardware-checkout/hardware/${row.id}`) View Hardware
+                td #{row.tag}
+                td #{row.category}
+                td
+                  if row.available=="Available"
+                    span.badge.bg-success.rounded-pill ✓
+                  else if row.available=="Rented"
+                    span.badge.bg-danger.rounded-pill ✕
+                  else
+                    span.badge.bg-secondary.rounded-pill ✕
+                td 
+                  if row.user
+                    #{row.user}
+                  else
+                  | N/A
+                td 
+                  if row.date
+                    #{row.date}
+                  else
+                  | N/A
 
       .row.mt-4
         .col

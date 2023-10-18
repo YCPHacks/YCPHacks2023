@@ -1,6 +1,7 @@
 import fp from 'fastify-plugin';
 import registerViewEngine from './registerViewEngine.js';
 import createTableData from './utils/tableData.mjs';
+import getHardwareData from './utils/hardwareData.mjs';
 import jsStringify from 'js-stringify';
 
 // Compile code into a single fastify plugin
@@ -22,7 +23,7 @@ export default fp(async function plugin(fastify, options) {
     });
 
     fastify.get('/hardware/:id', async function (request, reply) {
-      return reply.viewHC('hardware.pug');
+      return reply.viewHC('hardware.pug', {jsStringify, ...(await getHardwareData(request.params.id))});
     });
     fastify.get('/dropdown', async function (request, reply) {
       return reply.viewHC('dropdown.pug');

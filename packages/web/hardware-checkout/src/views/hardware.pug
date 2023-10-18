@@ -16,11 +16,25 @@ html
       .row.mb-4
         .col-md-6
           .card.p-3
-            h5 Tag: PC-1
-            p.mb-1 Category: PC
-            p.mb-1 Available: Yes
-            p.mb-1 User: N/A
-            p.mb-1 Date: N/A
+            h5 Tag: #{tag}
+            p.mb-1 Category: #{category}
+            p.mb-1 Available: 
+              if available=="Available"
+                span.badge.bg-success.rounded-pill ✓
+              else if available=="Rented"
+                span.badge.bg-danger.rounded-pill ✕
+              else
+                span.badge.bg-secondary.rounded-pill ✕
+            p.mb-1 User: 
+              if user
+                #{user}
+              else
+                | N/A
+            p.mb-1 Date: 
+              if date
+                #{date}
+              else
+                | N/A
             .input-group
               input.form-control(type="text", placeholder="User", aria-label="User")
               button.btn.btn-primary(type="button") Checkout
