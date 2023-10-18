@@ -1,44 +1,57 @@
 import database from '../../../core/src/utils/database.js';
 
+
 const hardware = (app) => {
     
     //GET operatiion to return a piece of hardware by unique ID 
     //This function executes a stored procedure the returns a JSON object containing details about the hardware item 
     //const scheme is the JSON object that is returned containing the details of the hardware item
     app.get('/hardware/:id', async (req, res) => {
-        const hardware = await database.executeStoredProcedure('Select_Single_Hardware_Items', req.params.id);
+        const session = await database.connect();
+        await session.sql('SET @id = ?;')
+                    .bind(req.params.id)
+                    .execute();
+        const statement = "CALL Select_Single_Hardware_Items(@id)";
+        const result = await session.sql(statement).execute();
+        const hardware = await result.fetchOne();
         const scheme = {
-            "id": hardware[0][0],
-            "tag": hardware[0][1],
-            "category": hardware[0][2],
-            "status":  hardware[0][3],
-            "time":  hardware[0][4],
-            "renter_id":  hardware[0][5]
+            id: hardware[0],
+            tag: hardware[1],
+            category: hardware[2],
+            status:  hardware[3],
+            time:  hardware[4],
+            renter_id:  hardware[5]
           }
         console.log(scheme);
         return scheme;
     });
+
 
     //GET operation to return all hardware
     //This function executes a stored procedure the returns a JSON object containing details about all hardware items
     //const data is the array of item details
     //const scheme is the JSON object that is returned containing the length of the array and the array itself
     app.get('/hardware', async (req, res) => {
-        const hardware = await database.executeStoredProcedure('Select_Hardware_Items');
+        const session = await database.connect();
+        const statement = "CALL Select_Hardware_Items()";
+        const result = await session.sql(statement).execute();
+        const hardware = await result.fetchAll();
         const data = hardware.map((item) => {
             return{
-              "id": item[0],
-              "tag": item[1],
-              "category": item[2],
-              "status":  item[3],
-              "time":  item[4],
-              "renter_id":  item[5]
+              id: item[0],
+              tag: item[1],
+              category: item[2],
+              status:  item[3],
+              time:  item[4],
+              renter_id:  item[5]
             }
           });
+
         const scheme = {
             "length": hardware.length,
             "data": data
           }
+        console.log(scheme);
         return scheme;
     });
 
