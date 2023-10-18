@@ -1,41 +1,31 @@
 import database from '../../../core/src/utils/database.js';
 
-//Creates a collection for me to test from
-//database.createCollection('hardware');
-
-//Add items to test collection`
-// database.create('hardware', {_id: 1, tag: 'RaspPi', category: 'external'});
-// database.create('hardware', {_id: 2, tag: 'PC-1', category: 'PCs'});
-// database.create('hardware', {_id: 3, tag: 'VR-1', category: 'VR Headset'});
-// database.create('hardware', {_id: 4, tag: 'VR-2', category: 'VR Headset'});
-// database.create('hardware', {_id: 5, tag: 'Arduino', category: 'external'});
-
-//delete an item from the collection
-//database.deleteMany('hardware', ["0000650f24d90000000000000001","0000650f24d90000000000000002", "0000650f24d90000000000000003", "0000650f24d90000000000000004", "0000650f24d90000000000000005","1", "25"]);
-
-
-
 const hardware = (app) => {
     
     //GET operatiion to return a piece of hardware by unique ID 
+    //This function executes a stored procedure the returns a JSON object containing details about the hardware item 
+    //const scheme is the JSON object that is returned containing the details of the hardware item
     app.get('/hardware/:id', async (req, res) => {
         const hardware = await database.executeStoredProcedure('Select_Single_Hardware_Items', req.params.id);
         const scheme = {
-            "id": hardware[0],
-              "tag": hardware[1],
-              "category": hardware[2],
-              "status": null,
-              "time": null,
-              "renter_id": null
+            "id": hardware[0][0],
+            "tag": hardware[0][1],
+            "category": hardware[0][2],
+            "status":  hardware[0][3],
+            "time":  hardware[0][4],
+            "renter_id":  hardware[0][5]
           }
         console.log(scheme);
         return scheme;
     });
 
     //GET operation to return all hardware
+    //This function executes a stored procedure the returns a JSON object containing details about all hardware items
+    //const data is the array of item details
+    //const scheme is the JSON object that is returned containing the length of the array and the array itself
     app.get('/hardware', async (req, res) => {
         const hardware = await database.executeStoredProcedure('Select_Hardware_Items');
-        const scheme = hardware.map((item) => {
+        const data = hardware.map((item) => {
             return{
               "id": item[0],
               "tag": item[1],
@@ -45,6 +35,10 @@ const hardware = (app) => {
               "renter_id":  item[5]
             }
           });
+        const scheme = {
+            "length": hardware.length,
+            "data": data
+          }
         return scheme;
     });
 
@@ -69,6 +63,7 @@ const hardware = (app) => {
 
 export default hardware;
 
+// GET /hardware Data Schema
 // JSON
 // {
 //   "length": (int) - should be a count of all rows retrieved
@@ -81,5 +76,21 @@ export default hardware;
 //       "time": (DateTime) - time of rental, from the rentals_current table. Should be set to "NULL" if no record
 //       "renter_id": (varchar255) - id of renter, should just be the user's first name for milestone 1, comes from rentals_current table
 //     }
+//   ]
+// }
+
+// GET /hardware/:id Data Schema
+// JSON
+// {
+//   "id": (int) - hardware id
+//   "tag": (varchar50) - hardware tag
+//   "category": (varchar50) - hardware category
+//   "status": (varchar50) - rental status, from the rentals_current table. Should be set to "available" if no record
+//   "time": (DateTime) - time of rental, from the rentals_current table. Should be set to "NULL" if no record
+//   "renter_id": (varchar255) - id of renter, should just be the user's first name for milestone 1, comes from rentals_current table
+//   "rental_history": (array) [
+//       "renter_id": (varchar255) - id of renter, should just be the user's first name for milestone 1
+//       "time": (DateTime)
+//       "status": (varchar50)
 //   ]
 // }
