@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "lerna run start --stream"
+    "dev": "lerna run start --stream",
+    "watch": "lerna run watch --stream"
   }
 }

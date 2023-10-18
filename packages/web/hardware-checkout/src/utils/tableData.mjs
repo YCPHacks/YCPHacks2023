@@ -5,22 +5,47 @@ const { serverConnection } = utils;
 // Purpose: to provide mock data for the table component
 
 // These are the column headers for the table
-const columns = ["Tag", "Category", "Available"];
+const columns = [" ","Name", "Tag", "Category", "Available", "User", "Date"];
 
 // This is the data for the table
-// THIS IS NOT HOW WE WANT THIS TO WORK IN THE FUTURE
-// This data pulls from the database everytime the pug layout is rendered
-// Ideally, the data should be cached in the browser so that it doesn't have to be pulled from the database every time the page is loaded
-// And then we clear the cache if the POST operation is used on the /api/equipment endpoint
-// I had trouble figuring out how to get data dynamically in pug, so I just did it this way for now
 async function getData() {
     // const equipment = await database.find('equipment');
     const equipment = await serverConnection('GET', 'equipment');
+    
+    if (!equipment) {
+        return [];
+    }
 
-    const data = equipment.map((item) => {
-        return [item.tag, item.category, item.available];
-    });
-    return data;
+
+    // const data = equipment.map((item) => {
+    //     return [item.tag, item.category, item.available];
+    // });
+    // const data = [
+    //     {
+    //         id: 1,
+    //         tag: "PC-1", 
+    //         category: "PC", 
+    //         available: "Available", 
+    //         user: "N/A", 
+    //         date: "N/A"},
+    //     {
+    //         id: 2432,
+    //         tag: "VR-2", 
+    //         category: "VR Headset", 
+    //         available: "Unavailable", 
+    //         user: "N/A", 
+    //         date: "N/A"},
+    //     {
+    //         id: 3354,
+    //         tag: "USBC-1", 
+    //         category: "USB Type-C Cable", 
+    //         available: "Rented", 
+    //         user: "Koen", 
+    //         date: Date.now().toString()
+    //     },
+    // ]
+
+    return equipment;
 };
 
 // These are the options for the table
@@ -33,6 +58,7 @@ async function createTableData() {
     return {
         columns,
         data: await getData(),
+        // data: [],
         sortable,
         searchable,
         filterable,

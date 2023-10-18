@@ -8,11 +8,13 @@ const fastify = Fastify({ logger: true });
 
 registerPlugins(fastify);
 
-fastify.register(hardwareCheckout);
+fastify.register(hardwareCheckout, {
+    prefix: '/hardware-checkout'
+});
 
 const start = async () => {
     try {
-        await fastify.listen(process.env.PORT);
+        await fastify.listen(process.env.API_PORT);
     } catch (err) {
         fastify.log.error(err);
         process.exitCode = 1;

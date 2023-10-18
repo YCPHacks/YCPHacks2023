@@ -2,11 +2,12 @@
 import fp from 'fastify-plugin';
 import registerViewEngine from './registerViewEngine.js';
 
+
 // A default fastify plugin
 export default fp(async function plugin(fastify, options) {
     registerViewEngine(fastify);
   }, {
-    name: 'discord-dashboard',
-    prefix: '/discord-dashboard'
+    name: 'event-control-panel',
+    encapsulate: true,
   });
   
