@@ -1,0 +1,12 @@
+{
+    "name": "@ycphacks/core-api",
+    "version": "0.0.1",
+    "description": "Core API package for YCPHacks",
+    "main": "src/index.mjs",
+    "files": [
+        "src/*"
+    ],
+    "dependencies": {
+        "@mysql/xdevapi": "^8.0.33"
+    }
+}
