@@ -11,6 +11,7 @@
         "pug": "^3.0.2"
     },
     "files": [
-        "src/views/*"
+        "src/views/*",
+        "src/public/*"
     ]
 }

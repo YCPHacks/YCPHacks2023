@@ -291,6 +291,7 @@ async function patch (collectionName, id, document, schemaName = connectionConfi
 module.exports = {
     connect,
     close,
+    executeStoredProcedure,
     createSchema,
     executeStoredProcedure,
     getSchema,
