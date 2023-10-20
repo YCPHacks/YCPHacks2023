@@ -22,7 +22,7 @@ const hardware = (app) => {
             time:  hardware[4],
             renter_id:  hardware[5]
           }
-        console.log(scheme);
+
         return scheme;
     });
 
@@ -51,7 +51,7 @@ const hardware = (app) => {
             "length": hardware.length,
             "data": data
           }
-        console.log(scheme);
+
         return scheme;
     });
 
