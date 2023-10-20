@@ -14,11 +14,11 @@ function registerViewEngine(app) {
         propertyName: 'viewHC'
     });
 
-    // app.register(fastifyStatic, {
-    //     root: path.join(require.resolve('@ycphacks/hardware-checkout-web'), '..', 'public'),
-    //     prefix: '/public/',
-    //     list: true
-    // });
+    app.register(fastifyStatic, {
+        root: path.join(require.resolve('@ycphacks/hardware-checkout-web'), '..', 'public'),
+        prefix: '/public/',
+        list: true
+    });
     console.log(path.join(require.resolve('@ycphacks/hardware-checkout-web'), '..', 'public'));
 }
 

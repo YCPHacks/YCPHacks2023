@@ -15,7 +15,7 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
   body
-    include includes/navbar.pug
+    include navbar.pug
 
     .container.mt-5
       h2 Hardware Inventory
@@ -29,7 +29,7 @@ html
               each col in columns
                 th(scope="col") #{col}
           tbody
-            each row in data
+            each row in data.data
               tr
                 td 
                   .dropdown
@@ -42,20 +42,20 @@ html
                 td #{row.tag}
                 td #{row.category}
                 td
-                  if row.available=="Available"
+                  if row.status=="Available"
                     span.badge.bg-success.rounded-pill ✓
-                  else if row.available=="Rented"
+                  else if row.status=="Rented"
                     span.badge.bg-danger.rounded-pill ✕
                   else
                     span.badge.bg-secondary.rounded-pill ✕
                 td 
-                  if row.user
-                    #{row.user}
+                  if row.renter_id
+                    #{row.renter_id}
                   else
                   | N/A
                 td 
-                  if row.date
-                    #{row.date}
+                  if row.time
+                    #{row.time}
                   else
                   | N/A
 

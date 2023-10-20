@@ -293,6 +293,7 @@ module.exports = {
     close,
     executeStoredProcedure,
     createSchema,
+    executeStoredProcedure,
     getSchema,
     createCollection,
     getCollection,

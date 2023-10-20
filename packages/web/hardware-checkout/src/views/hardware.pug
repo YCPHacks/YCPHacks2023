@@ -19,20 +19,20 @@ html
             h5 Tag: #{tag}
             p.mb-1 Category: #{category}
             p.mb-1 Available: 
-              if available=="Available"
+              if status=="Available"
                 span.badge.bg-success.rounded-pill ✓
-              else if available=="Rented"
+              else if status=="Rented"
                 span.badge.bg-danger.rounded-pill ✕
               else
                 span.badge.bg-secondary.rounded-pill ✕
             p.mb-1 User: 
-              if user
-                #{user}
+              if renter_id
+                #{renter_id}
               else
                 | N/A
             p.mb-1 Date: 
-              if date
-                #{date}
+              if time
+                #{time}
               else
                 | N/A
             .input-group

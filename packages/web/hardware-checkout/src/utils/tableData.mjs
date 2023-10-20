@@ -5,14 +5,14 @@ const { serverConnection } = utils;
 // Purpose: to provide mock data for the table component
 
 // These are the column headers for the table
-const columns = [" ","Name", "Tag", "Category", "Available", "User", "Date"];
+const columns = [" ", "Tag", "Category", "Available", "User", "Date"];
 
 // This is the data for the table
 async function getData() {
     // const equipment = await database.find('equipment');
-    const equipment = await serverConnection('GET', 'equipment');
+    const hardware = await serverConnection('GET', 'hardware');
     
-    if (!equipment) {
+    if (!hardware) {
         return [];
     }
 
@@ -45,7 +45,7 @@ async function getData() {
     //     },
     // ]
 
-    return equipment;
+    return hardware;
 };
 
 // These are the options for the table
